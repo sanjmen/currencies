@@ -125,3 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+FIXER_API_KEY = config("FIXER_API_KEY", default="", cast=str)
+
+DATE_FORMAT = "%Y-%m-%d"
