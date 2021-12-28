@@ -47,6 +47,7 @@ DJANGO_APPS = [
 # Put your third-party apps here
 THIRD_PARTY_APPS = [
     "django_extensions",
+    "rest_framework"
 ]
 
 # Put your project-specific apps here
@@ -186,3 +187,13 @@ CELERY_TASK_ROUTES = {
 DEFAULT_EXCHANGE = 'binance'
 UPDATE_MARKETS_INTERVAL = env.int("UPDATE_MARKETS_INTERVAL", default=86400)
 UPDATE_KLINES_INTERVAL = env.int("UPDATE_KLINES_INTERVAL", default=600)
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 25,
+}

@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from apps.api import urls as api_urls
+
 from apps.core import views
 
 # Wire up our API using automatic URL routing.
@@ -23,4 +25,5 @@ from apps.core import views
 urlpatterns = [
     path("", views.current_datetime),
     path("admin/", admin.site.urls),
+    path("api/v1/", include(api_urls))
 ]
