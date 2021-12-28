@@ -18,7 +18,6 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -81,17 +80,12 @@ This is an example of how to list things you need to use the software and how to
   ./manage.py migrate
   ```
 
-7. migrate database
-  ```sh
-  ./manage.py migrate
-  ```
-
-8. run server
+7. run server
   ```sh
   ./manage.py runserver
   ```
 
-7. in other terminal run celery
+8. in other terminal run celery
   ```sh
   celery -A apps.taskapp worker -B -l INFO
   ```
