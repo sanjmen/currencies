@@ -53,7 +53,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     "apps.core.apps.CoreConfig",
     "apps.taskapp.celery.TaskappConfig",
-    "apps.markets.apps.MarketsApp"
+    "apps.markets.apps.MarketsConfig"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -155,25 +155,34 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Django sites
 SITE_ID = 1
 
-# Celery setup (using redis)
+# Celery setup
 CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="amqp://")
 
 # Specify a Celery queue to route the tasks to: this will help to see all tasks
 # in a queue separated from other tasks of your project
 CELERY_TASK_QUEUES = {
     "celery": {"exchange": "celery", "binding_key": "celery"},
-    "debug_task": {
-        "exchage": "debug_task",
-        "binding_key": "debug_task",
+    "update_markets": {
+        "exchage": "update_markets",
+        "binding_key": "update_markets",
+    },
+    "update_klines": {
+        "exchage": "update_klines",
+        "binding_key": "update_klines",
     }
 }
 
 CELERY_TASK_ROUTES = {
-    # BARS
-    "apps.taskapp.celery.debug_task": {
-        "queue": "debug_task",
-        "exchange": "debug_task",
+    "apps.markets.tasks.update_markets": {
+        "queue": "update_markets",
+        "exchange": "update_markets",
+    },
+    "apps.markets.tasks.update_klines": {
+        "queue": "update_klines",
+        "exchange": "update_klines",
     },
 }
 
 DEFAULT_EXCHANGE = 'binance'
+UPDATE_MARKETS_INTERVAL = env.int("UPDATE_MARKETS_INTERVAL", default=86400)
+UPDATE_KLINES_INTERVAL = env.int("UPDATE_KLINES_INTERVAL", default=600)

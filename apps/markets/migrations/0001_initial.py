@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='Market',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('symbol', models.CharField(db_index=True, default="'BTC/USDT'", max_length=20)),
+                ('symbol', models.CharField(db_index=True, default="BTC/USDT", max_length=20)),
                 ('status', models.CharField(choices=[('TRADING', 'Trading'), ('BREAK', 'Break')], db_index=True, default='TRADING', max_length=7)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),

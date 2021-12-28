@@ -15,7 +15,7 @@ class Status(models.TextChoices):
 
 
 class Market(models.Model):
-    symbol = models.CharField(max_length=20, db_index=True, default="'BTC/USDT'")
+    symbol = models.CharField(max_length=20, db_index=True, default="BTC/USDT")
     status = models.CharField(choices=Status.choices, default=Status.TRADING, max_length=7, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

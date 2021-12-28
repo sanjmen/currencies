@@ -30,7 +30,10 @@ class TaskappConfig(AppConfig):
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(60, debug_task.s())
+    from apps.markets.tasks import update_markets, update_klines
+
+    sender.add_periodic_task(settings.UPDATE_MARKETS_INTERVAL, update_markets.s())
+    sender.add_periodic_task(settings.UPDATE_KLINES_INTERVAL, update_klines.s())
 
 @app.task(bind=True)
 def debug_task(self):
