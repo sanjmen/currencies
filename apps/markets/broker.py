@@ -1,5 +1,3 @@
-import pandas as pd
-
 import ccxt
 
 from django.conf import settings
