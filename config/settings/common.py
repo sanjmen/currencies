@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = [
 # Put your project-specific apps here
 PROJECT_APPS = [
     "apps.core.apps.CoreConfig",
+    "apps.taskapp.celery.TaskappConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -152,3 +153,24 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django sites
 SITE_ID = 1
+
+# Celery setup (using redis)
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="amqp://")
+
+# Specify a Celery queue to route the tasks to: this will help to see all tasks
+# in a queue separated from other tasks of your project
+CELERY_TASK_QUEUES = {
+    "celery": {"exchange": "celery", "binding_key": "celery"},
+    "debug_task": {
+        "exchage": "debug_task",
+        "binding_key": "debug_task",
+    }
+}
+
+CELERY_TASK_ROUTES = {
+    # BARS
+    "apps.taskapp.celery.debug_task": {
+        "queue": "debug_task",
+        "exchange": "debug_task",
+    },
+}
