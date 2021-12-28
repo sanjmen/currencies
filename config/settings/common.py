@@ -53,6 +53,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     "apps.core.apps.CoreConfig",
     "apps.taskapp.celery.TaskappConfig",
+    "apps.markets.apps.MarketsApp"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -174,3 +175,5 @@ CELERY_TASK_ROUTES = {
         "exchange": "debug_task",
     },
 }
+
+DEFAULT_EXCHANGE = 'binance'
